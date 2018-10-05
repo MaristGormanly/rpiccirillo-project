@@ -1,0 +1,26 @@
+h1 {
+  color: white;
+  text-align: center;
+  font-family: papyrus;
+}
+h2 {
+  color: white;
+  text-align: center;
+  font-family: papyrus;
+  word-spacing: 50px;
+}
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+tr {
+color: black;
+text-align: center;
+font-family: papyrus;
+background-color: wheat;
+}
+th{
+  background-color: lightsalmon;
+  color: black;
+}

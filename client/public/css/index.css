@@ -1,0 +1,15 @@
+h1 {
+	color: lightsalmon;
+  text-align: center;
+  font-family: papyrus;
+  font-size: 100px;
+}
+h2 {
+  color: lightsalmon;
+  text-align: center;
+  font-family: papyrus;
+	font-size: 25px;
+}
+body {
+background-image: url("/images/indexOregon.jpg")
+}

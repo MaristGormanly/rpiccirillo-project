@@ -1,0 +1,27 @@
+{
+  "name": "rpiccirillo-project",
+  "version": "1.0.0",
+  "description": "Implemented node npm for gormundly project",
+  "main": "oregonTrail.js",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaristGormanly/rpiccirillo-project.git"
+  },
+  "keywords": [
+    "oregonTrail",
+    "node"
+  ],
+  "author": "Rocco Piccirillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaristGormanly/rpiccirillo-project/issues"
+  },
+  "homepage": "https://github.com/MaristGormanly/rpiccirillo-project#readme"
+}
