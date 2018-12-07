@@ -66,11 +66,20 @@ app.route('/api/gameController/getGameData')
   app.route('/api/restartGame')
     .get(gameController.restartGame);
 
+    app.route('/api/getPace')
+      .get(gameController.getPace)
+
   app.route('/api/setup/screen/:id')
   	.get(setupController.getgameScreen)
 
   app.route('/api/setup/saveProfession')
   	.post(setupController.saveProfession);
+
+  app.route('/api/setup/saveMoney')
+    .post(setupController.saveMoney);
+
+  app.route('/setup/getSettings')
+    .get(gameController.getSettings);
 
   app.route('/api/setup/month')
   	.post(setupController.saveMonth);
@@ -78,7 +87,13 @@ app.route('/api/gameController/getGameData')
   app.route('/api/setup/leaderName')
   	.post(setupController.saveLeader);
 
-  app.route('/api/setupController/savePlayers')
-  	.post(setupController.savePlayers);
+  app.route('/api/setupController/playerSaved')
+    .post(setupController.savePlayers);
+
+app.route('/api/gameController/getPlayerNames')
+  .get(gameController.getPlayerNames);
+
+//app.route('/trail/updatePace')
+  //.get(gameController.changePace);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

@@ -11,3 +11,26 @@ exports.addNewTopScore = function(playerName, playerScore, dateEarned)
 {
   return new topTen(playerName, playerScore, dateEarned);
 }
+
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Pickles29",
+  database: "topTenOregonTrail"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+con.query("Use toptenoregontrail", function (err, result, fields)
+{
+ if (err) throw err;
+ console.log(result);
+});
+  con.query("SELECT * FROM topten", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});

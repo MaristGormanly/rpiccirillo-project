@@ -3,9 +3,10 @@ var terrain = require('../models/terrain');
 var weather = require('../models/weather');
 var pace = require('../models/pace');
 var setupController = require("./setupController");
-
+var mysql = require("mysql");
 var localGameData = gameData.getGameData();
 
+var count = 0;
 exports.getGameData = function(req, res)
 {
 	res.setHeader('Content-Type', 'application/json'); //mime type
@@ -54,17 +55,20 @@ exports.getPace = function(req, res)
 	res.send(localGameData.currentPace);
 }
 
+/*exports.changePace = function(req, res)
+{
+	localGameData.currentPace = pace.changePace();
+	res.setHeader('Content-Type', 'application/json');
+	res.send(localGameData.currentPace);
+}*/
+
 //limits the amount of players to 5
 exports.getPlayerNames = function(req, res)
 {
-  var playerNames = new Array();
-  for (var i = 0; i < 5; i++)
-   {
-      playerNames[i] = gameData.gameSettings.currentPlayers[i].playerName
-   }
   res.setHeader('Content-Type', 'application/json');
-  res.send(playerNames);
+  res.send(gameData.gameSettings.currentPlayers);
 }
+
 
 //retrieves all the player names
 exports.getAllplayers = function(req, res)
@@ -186,13 +190,15 @@ exports.updateGame = function(req, res)
   localGameData.month = gameData.getStartMonth("March");
 
   //the day count increases by one everyday
-	localGameData.dayCount++;
+	localGameData.daysOnTrail++;
 
 	//the weather is randomized every single day
 	localGameData.currentWeather = weather.getRandomWeather();
 
   //the terrain is randomized every single day
   localGameData.currentTerrain = terrain.getRandomTerrain();
+
+	localGameData.currentPace = pace.getPace();
 
 	//how your health gets affected by the weateher traveled
 	localGameData.groupHealth += localGameData.currentWeather.healthChange;
@@ -204,7 +210,7 @@ exports.updateGame = function(req, res)
   localGameData.milesTraveled += localGameData.currentPace.paceMiles;
 
 	//depending on the pace you choose, this updates your current pace
-	localGameData.currentPace = pace.getPace();
+	//localGameData.currentPace = pace.getPace();
 
 	//depnding on what the pace, your health may be affected
 	localGameData.groupHealth += localGameData.currentPace.healthChange;
@@ -245,3 +251,27 @@ exports.deathChance = function(req, res)
 	res.setHeader('Content-Type', 'application/json');
 	res.send(gameData.deathChance());
 }
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Pickles29",
+  database: "topTenOregonTrail"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+con.query("Use toptenoregontrail", function (err, result, fields)
+{
+ if (err) throw err;
+ console.log(result);
+});
+});
+
+/*var currentDate = new Date();
+
+if(exports.localGameData.groupStatus == "Dead")
+{
+	var addScore = "INSERT INTO topten (id, name, score, date) VALUES ('" + exports.currentTopScores[0].playerID + "', '" + exports.currentTopScores[0].playerName + "', '"
+	+ exports.currentTopScore[0].playerScore + "', '" + exports.currentTopScore[0].currentDate + "')";
+}*/

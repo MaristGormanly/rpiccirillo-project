@@ -13,8 +13,12 @@ function checkKeyPress(key)
 {
   if (key.keyCode == "49")//key press 1
   {
-    window.location = 'http://localhost:1337/trail';//links to trail
+    window.location = 'http://localhost:1337/setup';//links to trail
   }
+    else if(key.keyCode == "50")
+    {
+    window.location = 'https://en.wikipedia.org/wiki/Oregon_Trail';//links to OregonTrails wiki
+    }
     else if(key.keyCode == "51")//key press 2
     {
     window.location = 'http://localhost:1337/topten';//links to topten

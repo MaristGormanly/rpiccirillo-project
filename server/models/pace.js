@@ -18,16 +18,35 @@
 		paceArray.push(new pace("Grueling", 35, -8));
 		paceArray.push(new pace("Resting", 0, 5));
 
-
+var count = 0;
 	//returns all four paces when requested, used for testing
   exports.getAllPace = function ()
 	{
 		return paceArray;
 	}
 
-
+exports.getPace = function()
+{
+	return paceArray[0];
+}
 //gets a starting steady pace for the user to begin with
-	exports.getPace = function ()
+/*	exports.changePace = function()
 	{
-		return paceArray[0];
-	}
+		if(count == 0)
+		{
+			count++;
+			return paceArray[0];
+		} else if(count == 1)
+		{
+			count++;
+			return paceArray[1];
+		} else if(count == 2)
+		{
+			count++;
+			return paceArray[2];
+		} else if(count == 3)
+		{
+			count = 0;
+			return paceArray[3];
+		}
+}*/

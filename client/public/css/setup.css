@@ -3,7 +3,7 @@ h1 {
   text-align: center;
   font-family: papyrus;
 }
-h2 {
+h3 {
   color: white;
   text-align: center;
   font-family: papyrus;
@@ -12,7 +12,4 @@ h2 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-
 }

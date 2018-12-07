@@ -1,5 +1,5 @@
 var topTen = require('../models/topTen');
-
+var mysql = require("mysql");
 //three test names
 exports.currentTopScores = [];
 exports.currentTopScores.push(topTen.addNewTopScore("Rocco", 10, "10/15/2018"));
@@ -19,3 +19,19 @@ exports.saveHighScores = function(req, res)
   res.setHeader('Content-type', 'application/json');
   res.send(exports.currentTopScores);
 }
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Pickles29",
+  database: "topTenOregonTrail"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+con.query("Use toptenoregontrail", function (err, result, fields)
+{
+ if (err) throw err;
+ console.log(result);
+});
+});
