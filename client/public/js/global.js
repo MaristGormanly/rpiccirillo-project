@@ -6,6 +6,8 @@ var count = 0
     count++;
   }
 
+// var audio = new Audio("/music/OldeTimey.mp3");
+
 //allows the song to loop if it is selected as on
   audio.addEventListener('ended', function() {
     this.currentTime = 0;

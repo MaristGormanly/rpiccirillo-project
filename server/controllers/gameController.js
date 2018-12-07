@@ -6,7 +6,9 @@ var setupController = require("./setupController");
 var mysql = require("mysql");
 var localGameData = gameData.getGameData();
 
+//count is for pace
 var count = 0;
+
 exports.getGameData = function(req, res)
 {
 	res.setHeader('Content-Type', 'application/json'); //mime type
@@ -54,13 +56,13 @@ exports.getPace = function(req, res)
 	res.setHeader('Content-Type', 'application/json');
 	res.send(localGameData.currentPace);
 }
-
-/*exports.changePace = function(req, res)
+//retrives the change pace function
+exports.changePace = function(req, res)
 {
 	localGameData.currentPace = pace.changePace();
 	res.setHeader('Content-Type', 'application/json');
 	res.send(localGameData.currentPace);
-}*/
+}
 
 //limits the amount of players to 5
 exports.getPlayerNames = function(req, res)
@@ -69,30 +71,23 @@ exports.getPlayerNames = function(req, res)
   res.send(gameData.gameSettings.currentPlayers);
 }
 
-
 //retrieves all the player names
 exports.getAllplayers = function(req, res)
 {
 	res.setHeader('Content-Type', 'application/json');
 	res.send(gameData.getAllplayers());
 }
-
+//retrieves the players profession
 exports.getPlayerProfession = function(req, res)
 {
 	res.setHeader('Content-Type', 'application/json');
 	res.send(gameData.getPlayerProfession());
 }
-
+//retrieves the players monkey
 exports.getPlayerMoney = function(req, res)
 {
 	res.setHeader('Content-Type', 'application/json');
 	res.send(gameData.getPlayerMoney());
-}
-
-exports.getPlayerStatus = function(req, res)
-{
-	res.setHeader('Content-Type', 'application/json');
-	res.send(gameData.getPlayerStatus());
 }
 
 exports.getAllStatus = function(req, res)
@@ -171,7 +166,7 @@ exports.restartGame = function(req, res)
 	localGameData.playerStatus = setupController.playerStatus;
 
 	//gets the current players
-	localGameData.currentplayers = setupController.currentplayers;
+	localGameData.currentPlayers = setupController.currentPlayers;
 
   //sets money back to the default 0
   localGameData.playerMoney = 0;
@@ -198,7 +193,10 @@ exports.updateGame = function(req, res)
   //the terrain is randomized every single day
   localGameData.currentTerrain = terrain.getRandomTerrain();
 
-	localGameData.currentPace = pace.getPace();
+	if(count == 0) {
+		localGameData.currentPace = pace.getPace();
+		count++;
+	}
 
 	//how your health gets affected by the weateher traveled
 	localGameData.groupHealth += localGameData.currentWeather.healthChange;
@@ -209,9 +207,6 @@ exports.updateGame = function(req, res)
   //depending on your pace, you add a certain amount of mileage
   localGameData.milesTraveled += localGameData.currentPace.paceMiles;
 
-	//depending on the pace you choose, this updates your current pace
-	//localGameData.currentPace = pace.getPace();
-
 	//depnding on what the pace, your health may be affected
 	localGameData.groupHealth += localGameData.currentPace.healthChange;
 
@@ -219,7 +214,7 @@ exports.updateGame = function(req, res)
 	localGameData.playerStatus = setupController.playerStatus;
 
 	//retrieves the players
-	localGameData.currentplayers = setupController.currentplayers;
+	localGameData.currentPlayers = setupController.currentPlayers;
 
    //if your groups health reaches 0, or your day count reaches 45 you lose
 	if (localGameData.groupHealth <= 0 || localGameData.dayCount >=45)
@@ -252,6 +247,8 @@ exports.deathChance = function(req, res)
 	res.send(gameData.deathChance());
 }
 
+//-------------------------------------------------------------------------------
+//everything for SQL
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -266,12 +263,22 @@ con.query("Use toptenoregontrail", function (err, result, fields)
  if (err) throw err;
  console.log(result);
 });
+con.query("SELECT * FROM topten", function (err, result, fields) {
+	if (err) throw err;
+	console.log(result);
 });
+});
+
+//this is my attempt to add player and their new score to my database but struggled to
+//do so because I could not add score, this is my attempt at that
 
 /*var currentDate = new Date();
 
 if(exports.localGameData.groupStatus == "Dead")
 {
-	var addScore = "INSERT INTO topten (id, name, score, date) VALUES ('" + exports.currentTopScores[0].playerID + "', '" + exports.currentTopScores[0].playerName + "', '"
-	+ exports.currentTopScore[0].playerScore + "', '" + exports.currentTopScore[0].currentDate + "')";
+	var addScore = "INSERT INTO topten (id, name, score, date) VALUES ('"
+	+ exports.currentTopScores[0].playerID
+	+ "', '" + exports.currentTopScores[0].playerName + "', '"
+	+ exports.currentTopScore[0].playerScore + "', '"
+	+ exports.currentTopScore[0].currentDate + "')";
 }*/

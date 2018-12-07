@@ -9,17 +9,9 @@ function checkKeyPress(key)
     window.location = 'http://localhost:1137/trail';
   }
 }
-
+//----------------------------------------------------------------------------
+//whenever you change screens your currentScreen value increaases
 var currentScreen = 0;
-
-//press space to go back to the mainmenu
-document.body.onkeyup = function(e)
-{
-    if(e.keyCode == 32)
-    {
-       window.location = "/mainmenu";
-    }
-}
 
 //get screen
 function getScreen(screenId)
@@ -61,10 +53,10 @@ function getPlayerNames()
                     var player5Name =document.getElementById("player5Name");
 
 		player1Name.innerHTML = playerNames[0];
-		player2Name.innerHTML = playerNames[1];
-		player3Name.innerHTML = playerNames[2];
-		player4Name.innerHTML = playerNames[3];
-		player5Name.innerHTML = playerNames[4];
+		  player2Name.innerHTML = playerNames[1];
+		    player3Name.innerHTML = playerNames[2];
+		      player4Name.innerHTML = playerNames[3];
+		        player5Name.innerHTML = playerNames[4];
     console.log(playerNames);
     })
 	});
@@ -89,17 +81,13 @@ function showSettings()
 
 function populateSettings(gameSettings)
 {
-if(currentScreen == 4)
-console.log("hello");
 	document.getElementById('professionName').innerHTML = gameSettings.playerProfession;
 	document.getElementById('money').innerHTML = gameSettings.playerMoney;
 	document.getElementById('month').innerHTML = gameSettings.startMonth;
 	}
 
 
-
-
-//choose your profession then change screen
+//choose your profession then changes the screen
 gameContainer.addEventListener("click", function(e)
 {
 // get the element clicked
@@ -192,7 +180,7 @@ function saveProfession(profession)
   });
 
 
-  //post leader
+  //saves leader
   function saveLeader(playerName)
   {
   	fetch('/api/setup/leaderName',
@@ -221,7 +209,7 @@ function saveProfession(profession)
 
 
 
-//members
+//clicking the button makes it so that you save each player to its own id
 document.querySelector('body').addEventListener('click', function(event)
 {
     if (event.target.id === 'page2sub')
@@ -259,7 +247,7 @@ function savePlayers(playerName, playerID) {
 	}
 
 
-  //choosing the monnth
+  //choosing the month
   gameContainer.addEventListener("click", function(pickMonth)
    {
 
@@ -290,7 +278,7 @@ function savePlayers(playerName, playerID) {
       }
   	});
 
-//month
+//month gets saved
 function saveMonth(month)
 {
 	fetch('/api/setup/month',
@@ -305,8 +293,7 @@ function saveMonth(month)
     {
 			if (response.status !== 200) +
       {
-				//console.log('problem with ajax call!' + response.status + " msg: " + response.value);
-		//	 return;
+		//	console.log('problem with ajax call!' + response.status + " msg: " + response.value);
 		  }
 
 			else
@@ -322,7 +309,7 @@ function saveMonth(month)
 }
 
 
-
+//for the setup screen
 document.body.onkeypress = function(e)
 {
   if(e.keyCode == 13)
@@ -334,14 +321,10 @@ document.body.onkeypress = function(e)
 
   	if(currentScreen == 2)
     {
-
   		savePlayers(document.getElementById("player1").value, 1);
       savePlayers(document.getElementById("player2").value, 2);
       savePlayers(document.getElementById("player3").value, 3);
       savePlayers(document.getElementById("player4").value, 4);
-      // document.getElementById("player2").value,
-  	//	document.getElementById("player3").value, document.getElementById("player4").value);
-
   		}
   }
   		if(currentScreen == 4)
@@ -352,3 +335,18 @@ document.body.onkeypress = function(e)
   		     }
   	   }
 }
+//-----------------------------------------------------------------------------
+
+//sets up the audio in setup
+var audio = new Audio('/music/OldeTimey.mp3');
+var storedAudio = localStorage.getItem("music");
+
+if(storedAudio == "true")
+{
+  audio.play();
+}
+
+audio.addEventListener('ended', function() {
+  this.currentTime = 0;
+  this.play();
+}, false);

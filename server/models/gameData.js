@@ -12,32 +12,13 @@ function player(playerName, playerStatus, playerProfession, playerMoney)
   this.playerMoney = playerMoney;
 }
 
-
-//party Players
-function newPlayer(playerName)
-{
-  this.playerName = playerName;
-}
-
-//returns the new group members name
-exports.getNewPlayerName = function(playerName)
- {
-  return new newPlayer(playerName);
-}
-
-//to get all Players
-exports.getAllPlayers = function()
-{
-  return currentPlayers;
-}
-
-
 //playerProfession and money
 function playerProfession(profession, playerMoney)
 {
   this.profession = profession;
   this.playerMoney = playerMoney;
 }
+
 
 exports.getPlayerProfession = function(profession, playerMoney)
  {
@@ -57,23 +38,34 @@ function newStatus(alive)
   this.alive = alive;
 }
 
-//exports Players if they are still alive
-exports.getPlayerStatus = function(alive)
-{
- return new newStatus(alive);
-}
-
 //displays all status'
 exports.getAllStatus = function()
 {
  return PlayerStatus;
 }
 
+//party Players
+function newPlayer(playerName)
+{
+  this.playerName = playerName;
+}
+
+//returns the new group members name
+exports.getNewPlayerName = function(playerName)
+ {
+  return new newPlayer(playerName);
+}
+
+//to get all Players
+exports.getAllPlayers = function()
+{
+  return currentPlayers;
+}
 
 //created a gameData object
 function gameData()
 {
-  this.startMonth = "March";
+  this.startMonth = "";
   this.milesTraveled = 0;
   this.groupHealth = 100;
   this.currentPace = "";
@@ -81,12 +73,10 @@ function gameData()
   this.currentWeather = weather.getRandomWeather();
   this.currentTerrain = terrain.getRandomTerrain();
   this.currentPlayers = [];
-  //this.PlayerStatus = [];
-  this.playerProfession = "banker";
+  this.playerProfession = "";
   this.groupStatus = "";
   this.playerDeath = "";
   this.deathIndex = 4;
-  this.status = "";
 }
 
 //checks groupHealth
@@ -130,7 +120,7 @@ exports.healthCheck = function(groupHealth, deathIndex, alive, groupStatus)
 }
 
 
-//the function being used in case someone dies
+//the function being used in case someone diesl
 function death (deathProbability, deathIndex, alive)
 {
 	var randomNum = Math.floor(Math.random() * 100);
@@ -159,6 +149,7 @@ function startMonth(month)
 {
   this.month = month;
 }
+
 
 exports.getStartMonth = function(month)
  {
@@ -192,12 +183,11 @@ exports.loseGame = function(groupHealth, milesTraveled, daysOnTrail, messages)
 exports.gameSettings = new gameData();
 
 
-
-
+//-----------------------------------------------------------------------------
 // Create an empty array to contain our screens
 exports.startGameScreens = [];
 
-
+//first start screen to pick profession
 var startGame1 = "<h3>Many kinds of people made the trip to Oregon.</h3>"
 + "<h3>You may:</h3>"
 + "<ol id=\"setupQuestions1\" >"
@@ -208,24 +198,22 @@ var startGame1 = "<h3>Many kinds of people made the trip to Oregon.</h3>"
 + "<h3> <div id=\"selectedOption\">What is your choice?</div> </h3>";
 
 
-
+//second start screen to pick your leaders name
 var startGame2 = "<h3>What is the first name of the wagon leader?</h3>"
 + "<h3>Leader Name: <input id=\"leader\" /></h3>"
 + "<h3> <input type=\"button\" class=\"button-1\" id=\"page1sub\" value=\"Next\" /> </h3>";
 
 
-
+//third start screen to pick your teams' names
 var startGame3 = "<h3>What are the first names of the other members of your party?</h3>"
-
  + "<h3>Player Name: <input id=\"player1\" /></input?<br /></h3>"
  + "<h3>Player Name: <input id=\"player2\" /><br /></h3>"
  + "<h3>Player Name: <input id=\"player3\" /><br /></h3>"
  + "<h3>Player Name: <input id=\"player4\" /><br /></h3>"
-
 + "<h3><input type=\"button\" class=\"button-1\" id=\"page2sub\" value=\"Next\" /></h3>";
 
 
-
+//fourth start screen to pick which month you start your journey in
 var startGame4 = "<h3>It is 1848. You're jumping off place for oregon is Independence, Missouri.</h3>"
 + "<h3>You must decide which month to leave Independence.</h3>"
 + "<h3><li id=\"marchItem\">March</li></h3>"
@@ -238,7 +226,7 @@ var startGame4 = "<h3>It is 1848. You're jumping off place for oregon is Indepen
 + "<h3><div id=\"selectedOption\">What is your choice?</div></h3>";
 
 
-
+//fifth start screen to display all your chosen settings
 var startGame5 = "<h3>Congratulations! You are ready to start on your Journey!</h3>"
 + "<h3>Here are settings you selected for the game</h3>"
 + "<div id=\"returnData\">"

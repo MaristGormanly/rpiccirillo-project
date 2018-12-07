@@ -21,7 +21,8 @@ weatherArray.push(new weather(7, "Heavy Rain", -8, .4, .05));
 weatherArray.push(new weather(8, "Snow", -15, .3, .05));
 weatherArray.push(new weather(9, "Blizzard", -30, .1, .05));
 weatherArray.push(new weather(10, "Heavy Fog", -3, .5, .05));
-
+weatherArray.push(new weather(11, "Meteor Shower", -100, .0, .01));
+weatherArray.push(new weather(12, "Divine Shower", 100, 1, .01));
 
 //prints all the weatherTypes when requested
 exports.getAllWeather = function()
@@ -33,7 +34,7 @@ exports.getAllWeather = function()
 //prints a random weatherType
 exports.getRandomWeather = function ()
 {
-	var randomNum = Math.floor(Math.random() * 100);
+	var randomNum = Math.floor(Math.random() * 102);
 	var groupHealth = 100;
 	var mileChange = 0;
 
@@ -114,4 +115,17 @@ exports.getRandomWeather = function ()
 		console.log("The weatherType is Heavy Fog");
 	}
 
-};
+	//meteor shower
+	else if(randomNum == 100)
+	{
+		return weatherArray[11];
+		console.log("The weatherType is Meteor Shower");
+	}
+
+	//divine shower
+	else if(randomNum == 101)
+	{
+		return weatherArray[12];
+		console.log("The weatherType is Divine Shower");
+}
+}

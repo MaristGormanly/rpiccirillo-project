@@ -12,7 +12,8 @@ exports.addNewTopScore = function(playerName, playerScore, dateEarned)
   return new topTen(playerName, playerScore, dateEarned);
 }
 
-
+//--------------------------------------------------------------------------
+//everything we need to connect the database 
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
@@ -29,8 +30,4 @@ con.query("Use toptenoregontrail", function (err, result, fields)
  if (err) throw err;
  console.log(result);
 });
-  con.query("SELECT * FROM topten", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
 });

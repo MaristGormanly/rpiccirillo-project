@@ -25,12 +25,14 @@ var count = 0;
 		return paceArray;
 	}
 
+//starts the pace at steady
 exports.getPace = function()
 {
 	return paceArray[0];
 }
-//gets a starting steady pace for the user to begin with
-/*	exports.changePace = function()
+
+//changes the pace depending on when you press p
+	exports.changePace = function()
 	{
 		if(count == 0)
 		{
@@ -49,4 +51,4 @@ exports.getPace = function()
 			count = 0;
 			return paceArray[3];
 		}
-}*/
+}

@@ -66,8 +66,11 @@ app.route('/api/gameController/getGameData')
   app.route('/api/restartGame')
     .get(gameController.restartGame);
 
-    app.route('/api/getPace')
-      .get(gameController.getPace)
+  app.route('/api/getPace')
+    .get(gameController.getPace)
+
+  app.route('/trail/updatePace')
+    .get(gameController.changePace);
 
   app.route('/api/setup/screen/:id')
   	.get(setupController.getgameScreen)
@@ -93,7 +96,5 @@ app.route('/api/gameController/getGameData')
 app.route('/api/gameController/getPlayerNames')
   .get(gameController.getPlayerNames);
 
-//app.route('/trail/updatePace')
-  //.get(gameController.changePace);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
